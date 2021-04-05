@@ -242,9 +242,10 @@ return [
             'label_color' => 'success',
         ],
         [
-            'text'        => 'Kelola Sepatu',
-            'url'         => 'kelola_sepatu',
-            'icon'        => 'fa fa-book',
+            'text'        => 'Buku',
+            'url'         => 'admin/books',
+            'icon'        => 'fas fa-fw fa-book',
+            'can'         => 'isAdmin',
         ],
         ['header' => 'account_settings'],
         [
