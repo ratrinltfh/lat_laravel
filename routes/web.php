@@ -52,3 +52,7 @@ Route::post('admin/books', [AdminController::class, 'submit_book'])
 Route::patch('admin/books/update', [AdminController::class, 'update_book'])
     ->name('admin.book.update')
     ->middleware('is_admin');
+
+Route::get('admin/print_books', [AdminController::class, 'print_books'])
+    ->name('admin.print.books')
+    ->middleware('is_admin');
