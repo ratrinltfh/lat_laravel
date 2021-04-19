@@ -2,7 +2,8 @@
 
 namespace App\Http\Controllers;
 
-
+use App\Exports\BooksExport;
+use Maatwebsite\Excel\Facades\Excel;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
@@ -92,7 +93,7 @@ public function update_book(Request $req)
 
         $notification = array(
             'message' => 'Data Buku Berhasil Dihapus',
-            'alert-type' => 'succes'
+            'alert-type' => 'success'
         );
 
         return redirect()->route('admin.books')->with($notification);
@@ -103,6 +104,19 @@ public function update_book(Request $req)
         $pdf = PDF::loadview('print_books', ['books'=>$books]);
         return $pdf->download('data_buku.pdf');
 
+    }
+    public function import(Request $req){
+        Excel::import(new BooksImport, $req->$file('file'));
+
+        $notification = array(
+            'message' => 'Import Data Berhasil Dilakukan',
+            'alert-type' => 'success'
+        );
+
+        return redirect()->route('admin.books')->with($notification);
+    }
+    public function export(){
+        return Excel::download(new BooksExport, 'book.xlsx');
     }
 
 }
